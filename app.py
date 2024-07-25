@@ -67,6 +67,15 @@ csv_file['Final'] = (
 ).round()
 csv_file['Final en letra'] = csv_file['Final'].apply(lambda x: 'F' if x < 60 else 'D' if x < 70 else 'C' if x < 80 else 'B' if x < 90 else 'A')
 
+# Override 'Final en letra' if the user didn't deliver the semestral
+csv_file['Final en letra'] = csv_file.apply(
+  lambda row:
+    'I'
+    if row['Semestral'] == 0
+    else row['Final en letra'],
+  axis=1
+)
+
 # Export only the columns we need
 csv_file = csv_file[
   [
@@ -99,7 +108,12 @@ csv_file = csv_file[
 csv_file = csv_file.sort_values(by=['Apellidos'], ascending=True)
 csv_file.to_csv('export.csv', index=False)
 
+# Group by grade to a new file and export the amount of letters with the actual letter
+new_file = csv_file.groupby('Final en letra').size().reset_index(name='Cantidad')
+new_file.to_csv('grouped.csv', index=False)
+
 # Export the top 5 students to a new file
 csv_file = csv_file.sort_values(by=['Final'], ascending=False)
 csv_file = csv_file.head(5)
 csv_file.to_csv('top3.csv', index=False)
+
