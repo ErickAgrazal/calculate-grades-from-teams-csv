@@ -66,8 +66,8 @@ csv_file['Final'] = (
   csv_file['Parciales']
 ).round()
 csv_file['Final en letra'] = csv_file['Final'].apply(lambda x: 'F' if x < 60 else 'D' if x < 70 else 'C' if x < 80 else 'B' if x < 90 else 'A')
-# Export only the columns we need
 
+# Export only the columns we need
 csv_file = csv_file[
   [
     'Apellidos',
@@ -99,8 +99,7 @@ csv_file = csv_file[
 csv_file = csv_file.sort_values(by=['Apellidos'], ascending=True)
 csv_file.to_csv('export.csv', index=False)
 
-# Exporta otro archivo con los estudiantes que tengan
-# las tres notas finales más altas
+# Export the top 5 students to a new file
 csv_file = csv_file.sort_values(by=['Final'], ascending=False)
 csv_file = csv_file.head(5)
 csv_file.to_csv('top3.csv', index=False)
