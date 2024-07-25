@@ -2,7 +2,7 @@ import collections
 import csv
 import os
 
-IMPORT_FILE = os.environ.get('IMPORT_FILENAME', 'import2.csv')
+IMPORT_FILE = os.environ.get('IMPORT_FILENAME', 'import.csv')
 EXPORT_FILE = os.environ.get('EXPORT_FILENAME', 'export.csv')
 
 
