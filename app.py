@@ -42,7 +42,6 @@ csv_file['Laboratorios'] = (csv_file[
 ].sum(axis=1) / 10) * 0.25
 
 # Partial grades
-csv_file['original_parcial_1'] = csv_file['Parcial #1 - Temas de presentaciones']
 csv_file['Parcial #1 - Temas de presentaciones'] = csv_file['Parcial #1 - Temas de presentaciones'].apply(lambda x: x * 100/28)
 csv_file['Parciales'] = (csv_file[
   [
@@ -101,7 +100,6 @@ csv_file = csv_file[
     'Presentación #1 - Presentación oral',
     'Semestral - Avance #1 - CasosDeUso/HistoriasDeUsuario/etc',
     'Asistencia',
-    'original_parcial_1',
   ]
 ]
 
