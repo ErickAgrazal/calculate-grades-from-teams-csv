@@ -48,7 +48,6 @@ final_headers = [
 # -------------------------------
 #  Special operations
 csv_file['Parcial #1 - Tema #1'] = csv_file['Parcial #1 - Tema #1'] * 2
-csv_file['Parcial #1 - Tema #1'] = csv_file['Parcial #1 - Tema #1'].clip(upper=100)
 csv_file['Asistencia'] = 100
 csv_file['Final'] = 100
 # -------------------------------
@@ -58,7 +57,7 @@ general_data = csv_file[general_headers]
 
 # Function to normalize and weight scores
 def normalize_and_weight(data, headers, percentage):
-    return (data[headers].sum(axis=1) / len(headers)) * percentage
+    return ((data[headers].sum(axis=1) / len(headers)) * percentage).clip(upper=100 * percentage)
 
 # Add headers to data
 lab_data = normalize_and_weight(csv_file, lab_headers, percentages['labs'])
